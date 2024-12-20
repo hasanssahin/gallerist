@@ -15,4 +15,20 @@ public class BaseEntity {
     private Long id;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private Date createdDate;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
 }
