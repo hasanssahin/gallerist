@@ -2,7 +2,9 @@ package com.hasansahin.gallerist.exception;
 
 public enum MessageType {
     NO_RECORD_EXIST("1004","No record exist"),
-    GENERAL_EXCEPTION("9999","General exception");
+    GENERAL_EXCEPTION("9999","General exception"),
+    TOKEN_IS_EXPIRED("1005","Token is expired"),
+    USERNAME_NOT_FOUND("1006","Username not found");
 
     private String code;
     private String message;
