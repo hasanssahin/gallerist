@@ -2,6 +2,7 @@ package com.hasansahin.gallerist.service;
 
 import com.hasansahin.gallerist.dto.DtoUser;
 import com.hasansahin.gallerist.dto.request.AuthRequest;
+import com.hasansahin.gallerist.dto.request.RefreshTokenRequest;
 import com.hasansahin.gallerist.dto.response.AuthResponse;
 import com.hasansahin.gallerist.exception.BaseException;
 import com.hasansahin.gallerist.exception.ErrorMessage;
@@ -47,5 +48,9 @@ public class AuthenticationService {
         }catch (Exception e){
             throw new BaseException(new ErrorMessage(MessageType.USERNAME_OR_PASSWORD_INVALID, null));
         }
+    }
+
+    public AuthResponse refreshToken(RefreshTokenRequest refreshTokenRequest){
+        return refreshTokenService.refreshToken(refreshTokenRequest);
     }
 }

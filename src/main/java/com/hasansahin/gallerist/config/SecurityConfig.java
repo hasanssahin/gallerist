@@ -1,5 +1,6 @@
 package com.hasansahin.gallerist.config;
 
+import com.hasansahin.gallerist.exception.handler.AuthEntryPoint;
 import com.hasansahin.gallerist.jwt.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,10 +21,12 @@ public class SecurityConfig {
 
     private final AuthenticationProvider authenticationProvider;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    private final AuthEntryPoint authEntryPoint;
 
-    public SecurityConfig(AuthenticationProvider authenticationProvider, JwtAuthenticationFilter jwtAuthenticationFilter) {
+    public SecurityConfig(AuthenticationProvider authenticationProvider, JwtAuthenticationFilter jwtAuthenticationFilter, AuthEntryPoint authEntryPoint) {
         this.authenticationProvider = authenticationProvider;
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
+        this.authEntryPoint = authEntryPoint;
     }
 
 
@@ -34,6 +37,7 @@ public class SecurityConfig {
                                 .requestMatchers(REGISTER,AUTHENTICATE,REFRESH_TOKEN).permitAll()
                                 .anyRequest().authenticated()
                 )
+                .exceptionHandling(handle->handle.authenticationEntryPoint(authEntryPoint))
                 .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);

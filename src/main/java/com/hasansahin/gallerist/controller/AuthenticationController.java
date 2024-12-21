@@ -2,6 +2,7 @@ package com.hasansahin.gallerist.controller;
 
 import com.hasansahin.gallerist.dto.DtoUser;
 import com.hasansahin.gallerist.dto.request.AuthRequest;
+import com.hasansahin.gallerist.dto.request.RefreshTokenRequest;
 import com.hasansahin.gallerist.dto.response.AuthResponse;
 import com.hasansahin.gallerist.service.AuthenticationService;
 import com.hasansahin.gallerist.utils.RootEntity;
@@ -27,5 +28,10 @@ public class AuthenticationController extends BaseController{
     @PostMapping("/authenticate")
     public RootEntity<AuthResponse> authenticate(@Valid @RequestBody AuthRequest authRequest) {
         return ok(authenticationService.authenticate(authRequest));
+    }
+
+    @PostMapping("/refreshToken")
+    public RootEntity<AuthResponse> refreshToken(@Valid @RequestBody RefreshTokenRequest refreshTokenRequest) {
+        return ok(authenticationService.refreshToken(refreshTokenRequest));
     }
 }
