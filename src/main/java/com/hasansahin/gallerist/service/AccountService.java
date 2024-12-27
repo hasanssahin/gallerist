@@ -2,6 +2,9 @@ package com.hasansahin.gallerist.service;
 
 import com.hasansahin.gallerist.dto.DtoAccount;
 import com.hasansahin.gallerist.dto.DtoAccountIU;
+import com.hasansahin.gallerist.exception.BaseException;
+import com.hasansahin.gallerist.exception.ErrorMessage;
+import com.hasansahin.gallerist.exception.MessageType;
 import com.hasansahin.gallerist.model.Account;
 import com.hasansahin.gallerist.repository.AccountRepository;
 import org.springframework.beans.BeanUtils;
@@ -29,5 +32,9 @@ public class AccountService {
         Account savedAccount = accountRepository.save(createAccount(dtoAccountIU));
         BeanUtils.copyProperties(savedAccount,dtoAccount);
         return dtoAccount;
+    }
+
+    protected Account findAccountById(Long id){
+        return accountRepository.findById(id).orElseThrow(()->new BaseException(new ErrorMessage(MessageType.NO_RECORD_EXIST,id.toString())));
     }
 }
