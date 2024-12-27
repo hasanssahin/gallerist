@@ -2,6 +2,9 @@ package com.hasansahin.gallerist.service;
 
 import com.hasansahin.gallerist.dto.DtoCar;
 import com.hasansahin.gallerist.dto.DtoCarIU;
+import com.hasansahin.gallerist.exception.BaseException;
+import com.hasansahin.gallerist.exception.ErrorMessage;
+import com.hasansahin.gallerist.exception.MessageType;
 import com.hasansahin.gallerist.model.Car;
 import com.hasansahin.gallerist.repository.CarRepository;
 import org.springframework.beans.BeanUtils;
@@ -30,6 +33,10 @@ public class CarService {
         Car savedCar=carRepository.save(createCar(dtoCarIU));
         BeanUtils.copyProperties(savedCar, dtoCar);
         return dtoCar;
+    }
+
+    protected Car findCarById(Long id) {
+        return carRepository.findById(id).orElseThrow(()->new BaseException(new ErrorMessage(MessageType.NO_RECORD_EXIST,id.toString())));
     }
 
 
