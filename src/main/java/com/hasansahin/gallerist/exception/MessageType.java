@@ -8,7 +8,9 @@ public enum MessageType {
     USERNAME_OR_PASSWORD_INVALID("1007","Username or password is wrong"),
     REFRESH_TOKEN_NOT_FOUND("1008","Refresh token not found"),
     REFRESH_TOKEN_EXPIRED("1009","Refresh token is expired"),
-    CURRENCY_RATES_IS_OCCURRED("1010","Currency rates is occured");
+    CURRENCY_RATES_IS_OCCURRED("1010","Currency rates is occured"),
+    CUSTOMER_AMOUNT_IS_NOT_ENOUGH("1011","Customer amount is not enough"),
+    CAR_STATUS_IS_ALREADY_SOLD("1012","Car status is already sold");
 
     private String code;
     private String message;
