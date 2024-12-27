@@ -3,6 +3,9 @@ package com.hasansahin.gallerist.service;
 import com.hasansahin.gallerist.dto.DtoAddress;
 import com.hasansahin.gallerist.dto.DtoGallerist;
 import com.hasansahin.gallerist.dto.DtoGalleristIU;
+import com.hasansahin.gallerist.exception.BaseException;
+import com.hasansahin.gallerist.exception.ErrorMessage;
+import com.hasansahin.gallerist.exception.MessageType;
 import com.hasansahin.gallerist.model.Gallerist;
 import com.hasansahin.gallerist.repository.GalleristRepository;
 import org.springframework.beans.BeanUtils;
@@ -39,5 +42,9 @@ public class GalleristService {
 
         dtoGallerist.setAddress(dtoAddress);
         return dtoGallerist;
+    }
+
+    protected Gallerist findGalleristById(Long id) {
+        return galleristRepository.findById(id).orElseThrow(()->new BaseException(new ErrorMessage(MessageType.NO_RECORD_EXIST,id.toString())));
     }
 }
