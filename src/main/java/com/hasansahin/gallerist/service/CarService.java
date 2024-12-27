@@ -39,5 +39,8 @@ public class CarService {
         return carRepository.findById(id).orElseThrow(()->new BaseException(new ErrorMessage(MessageType.NO_RECORD_EXIST,id.toString())));
     }
 
+    protected Car update(Car car){
+        return carRepository.save(car);
+    }
 
 }

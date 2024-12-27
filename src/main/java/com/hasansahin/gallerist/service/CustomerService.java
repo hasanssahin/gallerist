@@ -4,6 +4,9 @@ import com.hasansahin.gallerist.dto.DtoAccount;
 import com.hasansahin.gallerist.dto.DtoAddress;
 import com.hasansahin.gallerist.dto.DtoCustomer;
 import com.hasansahin.gallerist.dto.DtoCustomerIU;
+import com.hasansahin.gallerist.exception.BaseException;
+import com.hasansahin.gallerist.exception.ErrorMessage;
+import com.hasansahin.gallerist.exception.MessageType;
 import com.hasansahin.gallerist.model.Customer;
 import com.hasansahin.gallerist.repository.CustomerRepository;
 import org.springframework.beans.BeanUtils;
@@ -47,5 +50,13 @@ public class CustomerService {
         dtoCustomer.setAccount(dtoAccount);
 
         return dtoCustomer;
+    }
+
+    protected Customer findCustomerById(Long customerId) {
+        return customerRepository.findById(customerId).orElseThrow(()->new BaseException(new ErrorMessage(MessageType.NO_RECORD_EXIST,customerId.toString())));
+    }
+
+    protected Customer update(Customer customer){
+        return customerRepository.save(customer);
     }
 }
